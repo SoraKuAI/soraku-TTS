@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "soraku-inference"
+version = "0.1.0"
+description = "Portable native FP32 inference for Soraku TTS v2 research checkpoints"
+readme = "README.md"
+requires-python = ">=3.13"
+license = "Apache-2.0"
+license-files = ["LICENSE", "ORIGINAL_MIT_LICENSE"]
+dependencies = [
+  "torch>=2.13", "transformers==4.57.3", "safetensors>=0.6",
+  "qwen-tts==0.1.1", "numpy>=2", "scipy>=1.14", "soundfile>=0.13",
+]
+
+[project.optional-dependencies]
+speaker = ["onnxruntime>=1.20", "torchaudio>=2.11", "tqdm>=4.70"]
+fast = ["tilelang>=0.1.15"]
+
+[project.scripts]
+soraku-infer = "soraku_inference.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["soraku_inference*"]
